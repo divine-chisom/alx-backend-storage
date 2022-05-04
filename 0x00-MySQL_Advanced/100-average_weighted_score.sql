@@ -21,6 +21,7 @@ BEGIN
             JOIN projects
                 ON corrections.project_id = projects.id
         WHERE corrections.user_id = user_id;
+        
         UPDATE users
             SET users.average_score = weighted_score_sum / weight_sum
             WHERE users.id = user_id;
