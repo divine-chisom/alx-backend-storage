@@ -19,8 +19,8 @@ def print_nginx_logs():
         nginx_collection.find({'method': 'GET', 'path': '/status'})
     ))
     print('{} status check'.format(statusChecks_count))
-    print("IPs:")
-    sorted_ips = nginx_collection.aggregate(
+    print('IPs:')
+    request_logs = nginx_collection.aggregate(
         [
             {
                 '$group': {'_id': "$ip", 'totalRequests': {'$sum': 1}}
@@ -31,9 +31,12 @@ def print_nginx_logs():
             {
                 '$limit': 10
             },
-        ])
-    for sorted_ip in sorted_ips:
-        print(f"\t{sorted_ip.get('_id')}: {sorted_ip.get('count')}")
+        ]
+    )
+    for request_log in request_logs:
+        ip = request_log['_id']
+        ip_requests_count = request_log['totalRequests']
+        print('\t{}: {}'.format(ip, ip_requests_count))
 
 if __name__ == '__main__':
     print_nginx_logs()
