@@ -33,7 +33,7 @@ def print_nginx_logs():
             },
         ])
     for sorted_ip in sorted_ips:
-        print(f"\t{sorted_ip['_id']}: {sorted_ip['count']}")
+        print(f"\t{sorted_ip.get('_id')}: {sorted_ip.get('count')}")
 
 if __name__ == '__main__':
     print_nginx_logs()
