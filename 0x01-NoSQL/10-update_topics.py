@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''Task 10's module.
+'''10. Change school topics.
 '''
 
 
